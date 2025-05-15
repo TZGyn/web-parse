@@ -7,12 +7,6 @@ type ScrapeOptions = {
 	screenshot?: 'visible' | 'fullpage'
 }
 
-const browser = await puppeteer.launch({
-	headless: true,
-	defaultViewport: deviceViewPort['desktop'],
-	args: ['--no-sandbox'],
-})
-
 export const scraper = async ({
 	url,
 	options = {},
@@ -20,9 +14,15 @@ export const scraper = async ({
 	url: string
 	options?: ScrapeOptions
 }) => {
+	const browser = await puppeteer.launch({
+		headless: true,
+		defaultViewport: deviceViewPort['desktop'],
+		args: ['--no-sandbox'],
+	})
+
 	const page = await browser.newPage()
 
-	await page.goto(url, { waitUntil: 'networkidle0' })
+	await page.goto(url, { waitUntil: 'networkidle2' })
 
 	let html
 	let markdown
@@ -87,6 +87,8 @@ export const scraper = async ({
 	html = html.toString()
 
 	markdown = await $`echo "${html}" | ./html2markdown`.text()
+
+	await browser.close()
 
 	return {
 		html,
