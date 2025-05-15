@@ -86,7 +86,7 @@ export const scraper = async ({
 
 	html = html.toString()
 
-	markdown = await $`echo "${html}" | ./html2markdown`.text()
+	// markdown = await $`echo "${html}" | ./html2markdown`.text()
 
 	await browser.close()
 
