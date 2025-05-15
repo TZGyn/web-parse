@@ -11,10 +11,9 @@ ENV NODE_ENV=production
 
 # Install packages needed to build node modules
 RUN apt-get update -qq && \
-    apt-get install -y python-is-python3 python3-pip pkg-config build-essential chromium ca-certificates \
+    apt-get install -y python-is-python3 pipx pkg-config build-essential chromium ca-certificates \
 						libgtk-3-0 libx11-xcb1 libasound2
 
-RUN pip install --user pipx
 RUN pipx install camoufox
 
 COPY ./package.json ./
