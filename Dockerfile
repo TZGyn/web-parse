@@ -14,7 +14,7 @@ RUN apt-get update -qq && \
     apt-get install -y python-is-python3 python3-pip pkg-config build-essential chromium ca-certificates \
 						libgtk-3-0 libx11-xcb1 libasound2
 
-RUN pip install -U camoufox
+RUN pip3 install -U camoufox
 
 COPY ./package.json ./
 COPY ./bun.lock ./
